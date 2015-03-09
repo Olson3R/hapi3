@@ -1,0 +1,22 @@
+extends /layouts/main.jade
+
+block main
+  ol(class="breadcrumb")
+    li Users
+  div(class="btn-group", role="group")
+    a(href="/users/new", class="btn btn-default table-actions") New
+  if users.length > 0
+    table(class="table table-stripped")
+      tr
+        th Id
+        th Name
+        th Email
+        th Actions
+      each user in users
+        tr
+          td #{user.id}
+          td #{user.name}
+          td #{user.email}
+          td TODO
+  else
+    p(class="text-muted") #[em No users found.]

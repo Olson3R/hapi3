@@ -1,0 +1,64 @@
+extends /layouts/main.jade
+
+block main
+  ol(class="breadcrumb")
+    li #[a(href="/remotes") Remotes]
+    li Receiver
+  div(class="container-fluid")
+    div(class="row")
+      div(class="col-xs-12 btn-group text-center", role="group")
+        button(type="button", class="btn btn-default col-xs-4", role="button" cmd="power on") Power On
+        button(type="button", class="btn btn-default col-xs-4", role="button" cmd="power off") Power Off
+        button(type="button", class="btn btn-default col-xs-4", role="button" cmd="dimmer") Dimmer
+      div(class="col-xs-12 btn-group text-center", role="group")
+        button(type="button", class="btn btn-default col-xs-4", role="button" cmd="volume up") Volume Up
+        button(type="button", class="btn btn-default col-xs-4", role="button" cmd="volume down") Volume Down
+        button(type="button", class="btn btn-default col-xs-4", role="button" cmd="mute") Mute
+      div(class="btn-group text-center col-xs-12", role="group")
+        div(class="btn-group col-xs-4" role="group")
+          button(type="button", class="btn btn-default dropdown-toggle col-xs-12", data-toggle="dropdown") Input
+            span(class="caret")
+          ul(class="dropdown-menu" role="menu")
+            li #[a(href="#", role="button", cmd="input dvd") DVD]
+            li #[a(href="#", role="button", cmd="input dvr") PC]
+            li #[a(href="#", role="button", cmd="input vcr") PS3]
+            //- Mappings got mixed up. Probably didn't fix them when the new receiver was purchased
+            li #[a(href="#", style="color:red", role="button", cmd="input ps3") PS3]
+            li #[a(href="#", style="color:red", role="button", cmd="input pc") PC]
+            li #[a(href="#", style="color:red", role="button", cmd="input tv") TV]
+            li #[a(href="#", style="color:red", role="button", cmd="input cd") CD]
+            li #[a(href="#", style="color:red", role="button", cmd="input hdp") HDP]
+            li #[a(href="#", style="color:red", role="button", cmd="input ipod") iPod]
+            li #[a(href="#", style="color:red", role="button", cmd="input phono") Phono]
+            li #[a(href="#", style="color:red", role="button", cmd="input satellite") Satellite]
+            li #[a(href="#", style="color:red", role="button", cmd="input satellite tune") Satellite Tune]
+            li #[a(href="#", style="color:red", role="button", cmd="input v-aux") V-Aux]
+        div(class="btn-group col-xs-4" role="group")
+          button(type="button", class="btn btn-default dropdown-toggle col-xs-12", data-toggle="dropdown") Input
+            span(class="caret")
+          ul(class="dropdown-menu" role="menu")
+            li #[a(href="#", role="button", cmd="input dvd") DVD]
+            li #[a(href="#", role="button", cmd="input dvr") PC]
+            li #[a(href="#", role="button", cmd="input vcr") PS3]
+        div(class="btn-group col-xs-4" role="group")
+          button(type="button", class="btn btn-default dropdown-toggle col-xs-12", data-toggle="dropdown") Input
+            span(class="caret")
+          ul(class="dropdown-menu" role="menu")
+            li #[a(href="#", role="button", cmd="input dvd") DVD]
+            li #[a(href="#", role="button", cmd="input dvr") PC]
+            li #[a(href="#", role="button", cmd="input vcr") PS3]
+
+  script(type="text/javascript")
+    | function sendCmd(cmd) {
+    |   if (cmd.length > 0) {
+    |     $.ajax({
+    |       type: 'GET',
+    |       url: 'http://192.168.1.104/send.htm?remote=denon%20avr-988&command=' + encodeURIComponent(cmd),
+    |       timeout: 60000
+    |     });
+    |   }
+    | }
+    | $(document).ready(function() {
+    |   $("button[role='button']").bind('click', null, function () { sendCmd($(this).attr('cmd')) })
+    |   $("a[role='button']").bind('click', null, function () { sendCmd($(this).attr('cmd')) })
+    | })

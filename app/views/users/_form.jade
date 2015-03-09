@@ -1,0 +1,22 @@
+if errors
+  div(class="panel panel-danger")
+    div(class="panel-heading")
+      h3(class="panel-title") Errors
+    div(class="pandel-body")
+      ol
+        each message in errors
+          li #{message}
+
+form(method="post", class="container-fluid")
+  div(class="row")
+    div(class="col-md-4 form-group")
+      label(class="required") Name
+      input(type="text", name="name", class="form-control", value=user.name)
+  div(class="row")
+    div(class="col-md-4 form-group")
+      label(class="required") Email
+      input(type="email", name="email", class="form-control",  value=user.email)
+  div(class="row")
+    div(class="col-md-4")
+      a(href="/users") Cancel
+      input(type="submit")

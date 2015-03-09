@@ -1,0 +1,10 @@
+extends /layouts/main.jade
+
+block main
+  ol(class="breadcrumb")
+    li Remotes
+  div(class="container-fluid")
+    div(class="row")
+      div(class="col-md-12 btn-group-vertical text-center", role="group")
+        each name, key in remotes
+          a(href="/remotes/#{key}", class="btn btn-default") #{name}
